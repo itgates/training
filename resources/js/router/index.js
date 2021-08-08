@@ -6,6 +6,7 @@ import store from "../store";
 import AuthRoutes from './auth.routes'
 import AdminRoutes from './admin.routes'
 import ThreadRoutes from './thread.routes'
+import TasksRoutes from './tasks.routes'
 
 Vue.use(Router)
 
@@ -25,6 +26,7 @@ export const routes = [{
 ...AuthRoutes,
 ...AdminRoutes,
 ...ThreadRoutes,
+...TasksRoutes,
 {
   path: '/blank',
   name: 'blank',
