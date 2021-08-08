@@ -1,32 +1,47 @@
 <template>
   <div class="d-flex flex-column flex-grow-1">
     <div class="d-flex align-center py-3">
-      <div>
-        <div class="display-1">Task #{{ id }}</div>
+      <div v-if="todo">
+        <div class="display-1">{{ todo.title }}</div>
       </div>
       <v-spacer></v-spacer>
-      <v-btn class="mr-1" color="indigo"> Edit </v-btn>
-      <v-btn color="red"> Delete </v-btn>
+      <v-btn x-small class="mr-1" color="indigo" @click="$refs.editTaskModal.open()"> Edit </v-btn>
+      <v-btn x-small color="red"> Delete </v-btn>
+      <edit-task-modal ref="editTaskModal" />
     </div>
-    <v-card flat>
-      <v-card-text>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
-        cupiditate dolore earum facere laboriosam minus, nemo ut? A accusantium
-        asperiores atque consectetur cum debitis distinctio doloremque ducimus
-        et expedita illo libero minus nulla quasi recusandae vel vitae
-        voluptatem, voluptatibus! Asperiores aspernatur assumenda deleniti enim
-        in ipsam iure quaerat similique! Velit.
-      </v-card-text>
-    </v-card>
   </div>
 </template>
 
 <script>
+import { mapState,mapActions } from "vuex";
+import EditTaskModal from "../../components/tasks/EditTaskModal.vue";
 export default {
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    EditTaskModal
+  },
   props: {
+    // eslint-disable-next-line vue/require-prop-types
     id: {
       required: true
     }
+  },
+  data() {
+    return {
+      dialog: false
+    };
+  },
+  created() {
+    this.initialize();
+  },
+  methods: {
+    ...mapActions(['loadTodo']),
+    initialize() {
+      this.loadTodo(this.id);
+    }
+  },
+  computed: {
+    ...mapState(["todo"])
   }
 };
 </script>

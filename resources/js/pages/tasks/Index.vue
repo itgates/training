@@ -5,49 +5,12 @@
         <div class="display-1">Tasks</div>
       </div>
       <v-spacer></v-spacer>
-      <v-btn color="primary">
-        Create Task
-      </v-btn>
+      <v-btn color="primary"> Create Task </v-btn>
     </div>
     <v-card flat>
       <v-card-text>
         <v-list>
-          <v-list-item>
-            <v-list-item-title>
-              Study Javascript
-            </v-list-item-title>
-            <v-list-item-action>
-              <router-link style="text-decoration: none" :to="{ name: 'task-show', params: { id: 1 } }">
-                <v-btn>
-                  Details
-                </v-btn>
-              </router-link>
-            </v-list-item-action>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>
-              Study React.js
-            </v-list-item-title>
-            <v-list-item-action>
-              <router-link style="text-decoration: none" :to="{ name: 'task-show', params: { id: 2 } }">
-                <v-btn>
-                  Details
-                </v-btn>
-              </router-link>
-            </v-list-item-action>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>
-              Study NodeJs
-            </v-list-item-title>
-            <v-list-item-action>
-              <router-link style="text-decoration: none" :to="{ name: 'task-show', params: { id: 3 } }">
-                <v-btn>
-                  Details
-                </v-btn>
-              </router-link>
-            </v-list-item-action>
-          </v-list-item>
+        <task-header v-for="todo in todos" :key="todo.id" :task="todo" />
         </v-list>
       </v-card-text>
     </v-card>
@@ -55,11 +18,24 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import TaskHeader from "../../components/tasks/TaskHeader.vue";
 export default {
-
-}
+  components: { TaskHeader },
+  created() {
+    this.initialize();
+  },
+  methods: {
+    ...mapActions(["loadTodos"]),
+    initialize() {
+      this.loadTodos();
+    }
+  },
+  computed: {
+    ...mapState(["todos"])
+  }
+};
 </script>
 
 <style scoped>
-
 </style>
