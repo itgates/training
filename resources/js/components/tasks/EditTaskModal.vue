@@ -35,7 +35,6 @@
   </v-row>
 </template>
 <script>
-import func from 'vue-editor-bridge';
 import { mapState,mapActions } from 'vuex'
 
 export default {

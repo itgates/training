@@ -10,7 +10,7 @@
     <v-card flat>
       <v-card-text>
         <v-list>
-          <task-header v-for="(task,index) in tasks" :key="index" :task="task"/>
+          <task v-for="(task,index) in tasks" :key="index" :task="task" />
         </v-list>
       </v-card-text>
     </v-card>
@@ -19,9 +19,10 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import TaskHeader from "../../components/tasks/TaskHeader.vue";
+import Task from "../../components/tasks/Task";
+
 export default {
-  components: { TaskHeader },
+  components: { Task },
    computed: {
     ...mapState(["tasks"])
   },
@@ -34,7 +35,7 @@ export default {
       this.loadTasks();
     }
   }
- 
+
 };
 </script>
 

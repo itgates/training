@@ -40,5 +40,5 @@ Route::middleware('auth:sanctum')->put('/replies/{reply}', function (Request $re
 });
 
 Route::middleware('auth:sanctum')->get('/tasks', function () {
-  return Todo::all()->load('subTodos');
+  return Todo::with('subtodos')->get();
 });

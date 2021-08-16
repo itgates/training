@@ -22,7 +22,7 @@ class TodoFactory extends Factory
     public function definition()
     {
         return [
-            'title'=>$this->faker->title,
+            'title'=>$this->faker->sentence,
             'details'=>$this->faker->paragraph(20,true),
         ];
     }

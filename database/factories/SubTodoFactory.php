@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\SubTodo;
+use App\Models\Todo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubTodoFactory extends Factory
@@ -19,12 +20,12 @@ class SubTodoFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'body' => $this->faker->paragraph(),
             'todo_id' => function() {
-                return Todo::facttory()->create()->id;
+                return Todo::factory()->create()->id;
             }
         ];
     }
