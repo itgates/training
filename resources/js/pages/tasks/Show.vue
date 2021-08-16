@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapState,mapActions } from "vuex";
+import { mapState } from "vuex";
 import EditTaskModal from "../../components/tasks/EditTaskModal.vue";
 export default {
   components: {
@@ -31,18 +31,24 @@ export default {
       dialog: false
     };
   },
+  computed: {
+    ...mapState(["tasks"])
+  },
   created() {
     this.initialize();
   },
   methods: {
-    ...mapActions(['loadTodo']),
     initialize() {
-      this.loadTodo(this.id);
+      axios.get(url,params)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.error(err); 
+      })
     }
-  },
-  computed: {
-    ...mapState(["todo"])
   }
+  
 };
 </script>
 

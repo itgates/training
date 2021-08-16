@@ -5,6 +5,7 @@ use App\Models\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Thread;
+use App\Models\Todo;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,6 @@ use App\Models\Thread;
 |
 */
 
-Route::resource('todos',TodoController::class,['except'=>['create','edit']]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -39,3 +39,6 @@ Route::middleware('auth:sanctum')->put('/replies/{reply}', function (Request $re
   return $reply->update(['body' => $request->body]);
 });
 
+Route::middleware('auth:sanctum')->get('/tasks', function () {
+  return Todo::all()->load('subTodos');
+});

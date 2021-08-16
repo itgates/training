@@ -34,15 +34,19 @@
     </v-dialog>
   </v-row>
 </template>
-
 <script>
+import func from 'vue-editor-bridge';
 import { mapState,mapActions } from 'vuex'
+
 export default {
   data () {
       return {
           dialog: false,
           editableTodo:null
       }
+  },
+  computed:{
+      ...mapState(['todo'])
   },
   created() {
       this.initialize()
@@ -64,9 +68,6 @@ export default {
           this.close()
       });
     }
-  },
-  computed:{
-      ...mapState(['todo'])
   }
 };
 </script>

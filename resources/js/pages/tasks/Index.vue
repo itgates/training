@@ -10,7 +10,7 @@
     <v-card flat>
       <v-card-text>
         <v-list>
-        <task-header v-for="todo in todos" :key="todo.id" :task="todo" />
+          <task-header v-for="(task,index) in tasks" :key="index" :task="task"/>
         </v-list>
       </v-card-text>
     </v-card>
@@ -22,18 +22,19 @@ import { mapState, mapActions } from "vuex";
 import TaskHeader from "../../components/tasks/TaskHeader.vue";
 export default {
   components: { TaskHeader },
+   computed: {
+    ...mapState(["tasks"])
+  },
   created() {
     this.initialize();
   },
   methods: {
-    ...mapActions(["loadTodos"]),
+    ...mapActions(["loadTasks"]),
     initialize() {
-      this.loadTodos();
+      this.loadTasks();
     }
-  },
-  computed: {
-    ...mapState(["todos"])
   }
+ 
 };
 </script>
 

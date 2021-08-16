@@ -18,29 +18,17 @@ const store = new Vuex.Store({
     },
     state: {
         thread: null,
-        todos: [],
-        todo: null
+        tasks: []
     },
     getters: {
-        getThread(state) {
-            return state.thread;
-        },
-        getTodos(state) {
-            return state.todos;
-        },
-        getTodo(state) {
-            return state.todo;
-        }
+        //
     },
     mutations: {
         setThread(state, value) {
             state.thread = value;
         },
-        setTodos(state, value) {
-            state.todo = value;
-        },
-        setTodo(state, value) {
-            state.todo = value;
+        setTasks(state, value) {
+            state.tasks = value;
         }
     },
     actions: {
@@ -55,17 +43,11 @@ const store = new Vuex.Store({
                 commit('setThread', response.data);
             })
         },
-        loadTodos({ commit }) {
-            axios.get('/api/todos').then((response) => {
-                commit('setTodos', response.data);
-            })
-        },
-        loadTodo({ commit }, value) {
-            axios.get(`/api/todos/${value}`).then((response) => {
-                commit('setTodo', response.data);
+        loadTasks({ commit }) {
+            axios.get('/api/tasks').then((response) => {
+                commit('setTasks', response.data);
             })
         }
-
     }
 })
 
