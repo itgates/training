@@ -23,7 +23,7 @@ class SubTodoFactory extends Factory
     public function definition(): array
     {
         return [
-            'body' => $this->faker->paragraph(),
+            'body' => $this->faker->sentence(2),
             'todo_id' => function() {
                 return Todo::factory()->create()->id;
             }
